@@ -9,6 +9,13 @@ const data=fetch('https://fakestoreapi.com/products')
 });
 
 function displayProducts(){
+
+  const select=document.querySelector('input')
+  select.addEventListener('input',function(e){
+const userInput=e.target.value;
+const filteredData=productsData.filter((item)=>item.title.toLowerCase().includes(userInput))
+console.log(filteredData)
+  })
     const container=document.getElementById('productContainer');
     productsData.map((product)=>{
         const productElement=document.createElement('div')
@@ -19,7 +26,7 @@ function displayProducts(){
       imgdiv.classList.add('p-2','h-auto', 'bg-white', 'rounded-lg', 'shadow-lg')
       const img=document.createElement('img')
       img.src=product.image
-      img.classList.add('h-40', 'w-full', 'object-cover', 'rounded-md', 'shadow-md')
+      img.classList.add('w-full', 'h-40', 'object-contain', 'rounded-md', 'shadow-md')
     imgdiv.appendChild(img)
       productElement.appendChild(imgdiv)
 
@@ -38,15 +45,6 @@ const btn=document.createElement('button')
 btn.textContent='Add to cart '
 btn.classList.add("bg-blue-500", "text-white", "py-2", "px-4", "rounded-md", "mt-4", "hover:bg-blue-600", "focus:outline-none", "focus:ring-2", "focus:ring-blue-300")
 productElement.appendChild(btn)
-// productElement.innerHTML=`
-// <div>
-// <img src=${product.image} alt=${product.title} class="h-10 w-full object-cover rounded-md shadow-md"/></div>
-
-// <h2 class='title'>${product.title} class ="text-xl font-semibold text-gray-800 mt-4"</h2>
-// <p class='price'>${product.price}</p>
-// <button class='addCart'>Add to cart </button>
-// `
-
 container.appendChild(productElement)
     })
 }
